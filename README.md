@@ -1,3 +1,5 @@
+## URL base da fake API: https://fake-api-isaude.herokuapp.com/
+
 ## Endpoints
 
 ### POST /register -> Cria um novo usuário.
