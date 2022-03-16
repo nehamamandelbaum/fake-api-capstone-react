@@ -1,24 +1,139 @@
-# json-server-base
-
-Esse é o repositório com a base de JSON-Server + JSON-Server-Auth já configurada, feita para ser usada no desenvolvimento das API's nos Capstones do Q2.
-
 ## Endpoints
 
-Assim como a documentação do JSON-Server-Auth traz (https://www.npmjs.com/package/json-server-auth), existem 3 endpoints que podem ser utilizados para cadastro e 2 endpoints que podem ser usados para login.
+### POST /register -> Cria um novo usuário.
 
-### Cadastro
+#### Corpo da requisição:
 
-POST /register <br/>
-POST /signup <br/>
-POST /users
+```
+{
+      "name": "Nehama",
+      "email": "email@email.com",
+      "password": "123456",
+      "dateOfBirth": "20/10/1989",
+      "gender": "masculino",
+      "cpf": "94743482982",
+      "city": "Belo Horizonte",
+      "state": "MG"
+    }
+```
 
-Qualquer um desses 3 endpoints irá cadastrar o usuário na lista de "Users", sendo que os campos obrigatórios são os de email e password.
-Você pode ficar a vontade para adicionar qualquer outra propriedade no corpo do cadastro dos usuários.
+#### Formato da resposta:
 
+```
+{
+	"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTY0NzQzNTc2OCwiZXhwIjoxNjQ3NDM5MzY4LCJzdWIiOiIzIn0.WwR93HlxKHAMoc7EjJU1AKFP6lnNuNE4y_bFsuXE1V8",
+	"user": {
+		"email": "email@email.com",
+		"name": "Nehama",
+		"dateOfBirth": "20/10/1989",
+		"gender": "masculino",
+		"cpf": "94743482982",
+		"city": "Belo Horizonte",
+		"state": "MG",
+		"id": 3
+	}
+}
+```
 
-### Login
+Possíveis erros: <br>
 
-POST /login <br/>
-POST /signin
+1. O email já existe
+2. Está faltando email ou senha.
 
-Qualquer um desses 2 endpoints pode ser usado para realizar login com um dos usuários cadastrados na lista de "Users"
+### POST /login
+
+#### Corpo da requisição:
+
+```
+{
+  "email": "olivier@mail.com",
+  "password": "bestPassw0rd"
+}
+```
+
+#### Formato da Resposta:
+
+```
+{
+	"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTY0NzQzNjY5MywiZXhwIjoxNjQ3NDQwMjkzLCJzdWIiOiIzIn0.YHRgcYf2JYK__h3CuQP3ILSYWep75ZoCEKJeF6rQVCM",
+	"user": {
+		"email": "email@email.com",
+		"name": "Nehama",
+		"dateOfBirth": "20/10/1989",
+		"gender": "masculino",
+		"cpf": "94743482982",
+		"city": "Belo Horizonte",
+		"state": "MG",
+		"id": 3
+	}
+}
+```
+
+### POST /vaccines
+
+Corpo da requisição:
+
+Obs: é preciso passar o ID do usuário na requisição, assim como o token no header.
+
+```
+{
+	"userId": 2,
+	"name": "Covid-19",
+	"manufacturer": "Osford",
+	"lote": "2337593279",
+	"applicationDate": "19/01/2022",
+	"shot": 2,
+	"location": "Araguari",
+	"totalShots": 2,
+	"nextShot": "20/04/2022"
+
+}
+```
+
+Possíveis erros:
+Pode estar faltando a propriedade userId ou o token no header.
+
+### GET /vaccines
+
+Deve-se passar o token no header e a resposta irá retornar um array com as vacinas daquele usuário.
+
+### GET /vaccines/:id
+
+Deve-se passar o id como parâmetro da URL, assim como o token no header e a resposta irá retornar a vacina buscada.
+
+### PATCH /vaccines/:id
+
+formato da requisição:
+
+Obs: Deve-se passar no corpo da requisição as propriedades que deseja mudar, assim como o token no header.
+
+```
+{
+	"manufacturer": "Pfizer"
+}
+```
+
+Formato da resposta:
+
+Retorna o objeto vacina com a alteração feita.
+
+```
+{
+	"userId": 2,
+	"name": "Covid-19",
+	"manufacturer": "Pfizer",
+	"lote": "2337593279",
+	"applicationDate": "19/01/2022",
+	"shot": 2,
+	"location": "Araguari",
+	"totalShots": 2,
+	"nextShot": "20/04/2022",
+	"id": 2
+}
+```
+
+### DELETE /vaccines/:id
+
+Deve-se passar o id da vacina que deseja deletar como parâmetro da url, assim como o token no header.
+
+Caso dê certo não retorna nenhuma resposta, apenas status 200.

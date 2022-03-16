@@ -1,11 +1,40 @@
 {
   "users": [
     {
-      "email": "kenzinho@mail.com",
-      "password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
-      "name": "Kenzinho",
-      "age": 38,
+      "email": "email@email1.com",
+      "password": "$2a$10$V./T6OfC04QL50f1VmIDdO.N/dw5bdYjYJPvWj6zy2Y78IIO17K/.",
+      "name": "Nehama",
+      "dateOfBirth": "20/10/1989",
+      "gender": "masculino",
+      "cpf": "94743482982",
+      "city": "Belo Horizonte",
+      "state": "MG",
       "id": 1
+    },
+    {
+      "email": "email@email.com",
+      "password": "$2a$10$0uwyH3On6rQP/2qMGPFDS.hJRSivLaYv5CQoKks2GHv5I083nh0ve",
+      "name": "Nehama",
+      "dateOfBirth": "20/10/1989",
+      "gender": "masculino",
+      "cpf": "94743482982",
+      "city": "Belo Horizonte",
+      "state": "MG",
+      "id": 2
+    }
+  ],
+  "vaccines": [
+    {
+      "userId": 2,
+      "name": "Covid-19",
+      "manufacturer": "Pfizer",
+      "lote": "2337593279",
+      "applicationDate": "19/01/2022",
+      "shot": 2,
+      "location": "Araguari",
+      "totalShots": 2,
+      "nextShot": "20/04/2022",
+      "id": 2
     }
   ]
 }
